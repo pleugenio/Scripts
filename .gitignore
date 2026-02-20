@@ -1,0 +1,11 @@
+*.log
+*.tar
+*.gz
+*.zip
+*.db
+.env
+.cache/
+.config/
+.local/
+.idea/
+.vscode/
