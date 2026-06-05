@@ -26,6 +26,14 @@ yum install -y https://repo.zabbix.com/zabbix/7.0/rhel/7/x86_64/zabbix-release-7
 # Limpar cache yum
 yum clean all
 
+# Instalar dependência pcre2 (requerida pelo zabbix-agent 7.x no EL7)
+echo "Instalando dependencia pcre2..."
+if ! yum install -y pcre2 2>/dev/null; then
+    echo "pcre2 nao encontrado no repo base, instalando via EPEL..."
+    rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 2>/dev/null || true
+    yum install -y pcre2
+fi
+
 # Instalar Zabbix Agent
 echo "Instalando zabbix-agent..."
 yum install -y zabbix-agent
