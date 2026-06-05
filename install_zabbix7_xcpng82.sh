@@ -27,11 +27,11 @@ yum install -y https://repo.zabbix.com/zabbix/7.0/rhel/7/x86_64/zabbix-release-7
 yum clean all
 
 # Instalar dependência pcre2 (requerida pelo zabbix-agent 7.x no EL7)
+# XCP-ng nao inclui pcre2 nos repos base — instalar direto do vault CentOS 7
 echo "Instalando dependencia pcre2..."
 if ! yum install -y pcre2 2>/dev/null; then
-    echo "pcre2 nao encontrado no repo base, instalando via EPEL..."
-    rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 2>/dev/null || true
-    yum install -y pcre2
+    echo "pcre2 nao encontrado no repo base, instalando via vault CentOS 7..."
+    rpm -ivh https://vault.centos.org/centos/7/os/x86_64/Packages/pcre2-10.23-2.el7.x86_64.rpm
 fi
 
 # Instalar Zabbix Agent
